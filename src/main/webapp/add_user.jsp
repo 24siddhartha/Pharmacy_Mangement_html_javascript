@@ -17,7 +17,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             align-items: center;
             flex-direction: column;
             height: 100vh;
-            background: url('https://source.unsplash.com/1600x900/?medical,hospital') no-repeat center center/cover;
+            background: url('imgs/loginbackground.jpeg') no-repeat center center/cover;
         }
         .header {
             position: absolute;
