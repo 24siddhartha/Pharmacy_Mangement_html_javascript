@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Inventory - Medical Inventory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background: url('https://source.unsplash.com/1600x900/?medicine,inventory') no-repeat center center/cover;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #28a745;
+            color: white;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Inventory Details</h2>
+        <table>
+            <tr>
+                <th>Medicine ID</th>
+                <th>Medicine Name</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Expiry Date</th>
+            </tr>
+            <tr>
+                <td>101</td>
+                <td>Paracetamol</td>
+                <td>Pain Relief</td>
+                <td>50</td>
+                <td>12/2025</td>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td>Amoxicillin</td>
+                <td>Antibiotic</td>
+                <td>30</td>
+                <td>08/2024</td>
+            </tr>
+        </table>
+        <a href="pharmacist_dashboard.html" class="back-button">Back to Dashboard</a>
+    </div>
+</body>
+</html>
+

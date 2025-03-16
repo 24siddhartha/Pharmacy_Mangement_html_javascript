@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Stock - Medical Inventory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background: url('imgs/loginbackground.jpeg') no-repeat center center/cover;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            width: 450px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .submit-button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .submit-button:hover {
+            background-color: #218838;
+        }
+        .back-button {
+            display: block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            width: 100%;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-top: 10px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+    <script>
+        function updateStock() {
+        let action = document.getElementById("action").value;
+        let medicineId = document.getElementById("medicine_id").value;
+        let medicineName = document.getElementById("medicine_name").value;
+        let category = document.getElementById("category").value;
+        let quantity = document.getElementById("quantity").value;
+        let expiryDate = document.getElementById("expiry_date").value;
+        let price = document.getElementById("price").value;
+
+        // Debugging logs
+        console.log("Action:", action);
+        console.log("Medicine ID:", medicineId);
+        console.log("Medicine Name:", medicineName);
+        console.log("Category:", category);
+        console.log("Quantity:", quantity);
+        console.log("Expiry Date:", expiryDate);
+        console.log("Price:", price);
+
+        let data = new FormData();
+        data.append("action", action);
+        data.append("medicine_id", medicineId);
+        data.append("medicine_name", medicineName);
+        data.append("category", category);
+        data.append("quantity", quantity);
+        data.append("expiry_date", expiryDate);
+        data.append("price", price);
+
+        fetch("UpdateStockServlet", {
+            method: "POST",
+            body: data
+        })
+        .then(response => response.text())
+        .then(result => {
+            console.log("Server Response:", result);
+            let messageBox = document.getElementById("message");
+            if (result.includes("success")) {
+                messageBox.style.color = "green";
+                messageBox.innerText = "Stock updated successfully!";
+            } else {
+                messageBox.style.color = "red";
+                messageBox.innerText = "Failed to update stock.";
+            }
+        })
+        .catch(error => console.error("Fetch Error:", error));
+    }
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Manage Stock</h2>
+        <div class="form-group">
+            <label for="action">Action:</label>
+            <select id="action" required>
+                <option value="add">Add New Medicine</option>
+                <option value="update">Update Existing Medicine</option>
+                <option value="remove">Remove Medicine</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="medicine_id">Medicine ID:</label>
+            <input type="text" id="medicine_id" required>
+        </div>
+        <div class="form-group">
+            <label for="medicine_name">Medicine Name:</label>
+            <input type="text" id="medicine_name" required>
+        </div>
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <input type="text" id="category" required>
+        </div>
+        <div class="form-group">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" required>
+
+        </div>
+        <div class="form-group">
+            <label for="expiry_date">Expiry Date:</label>
+            <input type="date" id="expiry_date" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" id="price" step="0.01" required>
+        </div>
+        <button class="submit-button" onclick="updateStock()">Submit</button>
+        <p id="message" class="message"></p>
+        <a href="pharmacist_dashboard.html" class="back-button">Back to Dashboard</a>
+    </div>
+
+        <script>
+        function autofillData() {
+            let idInput = document.getElementById("search_id");
+            if (!idInput) return;
+
+            let idValue = idInput.value;
+            fetch('FetchDataServlet?id=' + idValue)
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        for (let key in data) {
+                            let inputField = document.getElementById(key);
+                            if (inputField) {
+                                inputField.value = data[key];
+                            }
+                        }
+                    }
+                })
+                .catch(error => console.error('Auto-fill Error:', error));
+        }
+        </script>
+        
+</body>
+</html>

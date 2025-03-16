@@ -1,0 +1,82 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background: url('imgs/loginbackground.jpeg') no-repeat center center/cover;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container Styling */
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    width: 450px;
+    text-align: center;
+}
+
+/* Heading */
+h2 {
+    margin-bottom: 20px;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Buttons */
+.submit-button, .update-button, .delete-button, .back-button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.submit-button { background-color: #28a745; }
+.submit-button:hover { background-color: #218838; }
+
+.update-button { background-color: #ffc107; }
+.update-button:hover { background-color: #e0a800; }
+
+.delete-button { background-color: #dc3545; }
+.delete-button:hover { background-color: #c82333; }
+
+.back-button { background-color: #007bff; }
+.back-button:hover { background-color: #0056b3; }
+
+/* Messages */
+.message {
+    margin-top: 10px;
+    font-weight: bold;
+    color: green;
+}
+

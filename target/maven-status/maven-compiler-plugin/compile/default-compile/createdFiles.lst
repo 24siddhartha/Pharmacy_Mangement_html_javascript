@@ -1,0 +1,11 @@
+com\myproject\medical\servlets\DeleteMedicineServlet.class
+com\myproject\medical\servlets\ViewInventoryServlet.class
+com\myproject\medical\servlets\AddMedicineServlet.class
+com\myproject\medical\servlets\UpdateMedicineServlet.class
+com\myproject\medical\servlets\UpdateStockServlet.class
+com\myproject\medical\servlets\AddUserServlet.class
+com\myproject\medical\servlets\FetchMedicinesServlet.class
+com\myproject\medical\servlets\LoginServlet.class
+com\myproject\medical\servlets\RemoveUserServlet.class
+fetch\fetchMedicalDetails.class
+com\myproject\medical\factory\Connector.class
