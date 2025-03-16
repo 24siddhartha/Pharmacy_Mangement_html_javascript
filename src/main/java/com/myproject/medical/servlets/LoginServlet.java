@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.myproject.medical.servlets;
 
-/**
- *
- * @author gugul
- */
 import com.myproject.medical.factory.Connector;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,7 +30,7 @@ public class LoginServlet extends HttpServlet {
             Connection con = Connector.getCon();
             
             // Prepare SQL statement
-            String query = "SELECT * FROM appuser WHERE username = ? AND password = ?";
+            String query = "SELECT userRole FROM appuser WHERE username = ? AND password = ?";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, username);
             ps.setString(2, password);
@@ -46,13 +38,23 @@ public class LoginServlet extends HttpServlet {
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
+                String userRole = rs.getString("userRole"); // Assuming 'userRole' column exists
+                
+                // Create session
                 HttpSession session = request.getSession();
                 session.setAttribute("username", username);
-                response.sendRedirect("adminDashboard.html"); // Redirect to dashboard on success
+                session.setAttribute("userRole", userRole);
+                
+                // Redirect based on user role
+                if ("admin".equalsIgnoreCase(userRole)) {
+                    response.sendRedirect("adminDashboard.jsp");
+                } else {
+                    response.sendRedirect("pharmacist_dashboard.jsp");
+                }
             } else {
                 request.setAttribute("errorMessage", "Invalid username or password.");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
-                dispatcher.forward(request, response); // Redirect back to login with error
+                dispatcher.forward(request, response);
             }
             
             con.close();
@@ -62,4 +64,5 @@ public class LoginServlet extends HttpServlet {
         }
     }
 }
+
 

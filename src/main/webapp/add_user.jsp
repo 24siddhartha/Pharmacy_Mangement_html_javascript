@@ -100,7 +100,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <form action="AddUserServlet" method="POST">
             <input type="text" name="newUsername" placeholder="Username" required>
             <input type="password" name="newPassword" placeholder="Password" required>
-            <input type="text" name="userRole" placeholder="User Role (Admin/User)" required>
+            <input type="text" name="userRole" placeholder="User Role (Admin/Pharmacist)" required>
             <input type="text" name="fullName" placeholder="Full Name" required>
             <input type="date" name="dob" placeholder="Date of Birth" required>
             <input type="tel" name="mobile" placeholder="Mobile Number" required>

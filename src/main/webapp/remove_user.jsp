@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
+<%@ page import="java.sql.*" %>
+<%@ page import="com.myproject.medical.factory.Connector" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +48,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             flex-direction: column;
             align-items: center;
         }
-        .form-container input {
+        .form-container select {
             width: 80%;
             padding: 10px;
             margin: 10px 0;
@@ -98,34 +95,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <div class="form-container">
         <h2>Remove User</h2>
         <form action="RemoveUserServlet" method="POST">
-            <input type="text" name="username" placeholder="Username" required>
+            <select name="username" required>
+                <option value="" disabled selected>Select a user</option>
+                <%
+                    try {
+                        Connection con = Connector.getCon();
+                        String query = "SELECT username FROM appuser WHERE userRole != 'admin'";
+                        PreparedStatement ps = con.prepareStatement(query);
+                        ResultSet rs = ps.executeQuery();
+
+                        while (rs.next()) {
+                            String username = rs.getString("username");
+                %>
+                            <option value="<%= username %>"><%= username %></option>
+                <%
+                        }
+                        con.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                %>
+            </select>
             <button type="submit">Remove User</button>
         </form>
         <a href="adminDashboard.jsp">Back to Dashboard</a>
     </div>
-
-        <script>
-        function autofillData() {
-            let idInput = document.getElementById("search_id");
-            if (!idInput) return;
-
-            let idValue = idInput.value;
-            fetch('FetchDataServlet?id=' + idValue)
-                .then(response => response.json())
-                .then(data => {
-                    if (data) {
-                        for (let key in data) {
-                            let inputField = document.getElementById(key);
-                            if (inputField) {
-                                inputField.value = data[key];
-                            }
-                        }
-                    }
-                })
-                .catch(error => console.error('Auto-fill Error:', error));
-        }
-        </script>
-        
 </body>
 </html>
-
